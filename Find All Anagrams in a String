@@ -1,0 +1,65 @@
+Given a string s and a non-empty string p, find all the start indices of p's anagrams in s.
+
+Strings consists of lowercase English letters only and the length of both strings s and p will not be larger than 20,100.
+
+The order of output does not matter.
+
+Example 1:
+
+Input:
+s: "cbaebabacd" p: "abc"
+
+Output:
+[0, 6]
+
+Explanation:
+The substring with start index = 0 is "cba", which is an anagram of "abc".
+The substring with start index = 6 is "bac", which is an anagram of "abc".
+
+
+#Solution 
+class Solution {
+    
+     public static final int MAX=256;
+     public static boolean compare(char[] arr1,char[] arr2){
+         for(int i=0;i<MAX;++i)
+         if(arr1[i]!=arr2[i])
+             return false;
+         return true;
+         
+     }
+    
+    public List<Integer> findAnagrams(String s, String p) {
+        List<Integer> res=new ArrayList<Integer>();
+        
+         if(s == null || p == null || s.length() < p.length()) 
+             return res;
+        int a=s.length();
+        int b=p.length();
+        
+        char[] countt=new char[MAX];        
+        char[] countp=new char[MAX];
+        
+        for(int i=0;i<b;++i)
+        {
+            (countt[s.charAt(i)])++;
+            (countp[p.charAt(i)])++;
+        }
+        
+        for(int j=b;j<a;++j){
+            
+            if(compare(countt,countp))
+                res.add(j-b);
+            
+            (countt[s.charAt(j)])++;
+            (countt[s.charAt(j-b)])--;
+        }
+        
+        //Compare Last text window
+        if(compare(countt,countp))
+        res.add(a-b);
+        
+      return res;
+        
+    }
+}
