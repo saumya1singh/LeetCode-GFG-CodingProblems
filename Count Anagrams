@@ -1,0 +1,105 @@
+Given a word S and a text C. Return the count of the occurences of anagrams of the word in the text.
+
+Input:
+The first line of input contains an integer T denoting the number of test cases. The description of T test cases follows. The first line of each test case contains a text S consisting of only lowercase characters.
+The second line contains a word consisting of only lowercase characters.
+
+Output:
+Print the count of the occurences of anagrams of the word C in the text S.
+
+Constraints:
+1 <= T <= 50
+1 <= |S| <= |C| <= 50
+
+Example:
+Input:
+2
+forxxorfxdofr
+for
+aabaabaa
+aaba
+
+Output:
+3
+4
+
+
+## SOLUTION
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+class GFG
+ {  public static final int MAX=256;
+ 
+     public static boolean compare(char arr1[],char arr2[]){
+         for(int i=0;i<MAX;++i)
+        
+            if(arr1[i]!=arr2[i])
+            return false;
+            
+            return true;
+        
+         
+     }
+     
+    public static void search(String text,String patt){
+        
+        //find lengths
+        int count=0;
+        int t=text.length();
+        int p=patt.length();
+        
+        //char array
+        char[] countTW=new char[MAX];
+        char[] countp=new char[MAX];
+        
+        for(int i=0;i<p;++i){
+            (countTW[text.charAt(i)])++;
+             (countp[patt.charAt(i)])++;
+        }
+        
+        for(int i=p;i<t;++i)
+        {
+            if(compare(countTW,countp))
+            //System.out.println(i-p);
+            ++count;
+            
+            //add new char to current window
+            (countTW[text.charAt(i)])++;
+            
+            //remove previous char from current window
+            (countTW[text.charAt(i-p)])--;
+            
+        }
+        
+        //compare last text window
+        if(compare(countTW,countp))
+        //System.out.println(t-p);
+        ++count;
+        
+        System.out.println(count);
+        
+    } 
+	public static void main (String[] args)
+	 {
+	 int t;
+	 Scanner scan = new Scanner(System.in);
+	 t=scan.nextInt();
+	 scan.nextLine();
+	 String[] text=new String[MAX];
+	 String[] patt=new String[MAX];
+	 
+	 for(int i=0;i<t;++i)
+	 
+	 {
+	  text[i]=scan.nextLine();
+	  patt[i]=scan.nextLine();
+	  //scan.nextLine();
+	 }
+	 
+	 for(int j=0;j<t;++j)
+	 search(text[j],patt[j]);
+	 
+	 }
+ }
