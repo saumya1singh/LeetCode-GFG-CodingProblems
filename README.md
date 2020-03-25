@@ -1,3 +1,3 @@
 # LeetCode-GFG-CodingProblems
 
-Competetive Programming
+Competitive Programming
