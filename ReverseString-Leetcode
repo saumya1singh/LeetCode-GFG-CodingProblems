@@ -19,13 +19,13 @@ Output: ["h","a","n","n","a","H"]
 ##SOLUTION 
 
 class Solution {
-    public void reverseString(char[] s) {
-        int a=0,b=s.length-1;
+    public void reverseString(char[] ani) {
+        int a=0,b= ani.length-1;
         
         while(a<b){
-        char temp=s[a];
-        s[a]=s[b];
-        s[b]=temp;
+        char temp=ani[a];
+        ani[a]= ani[b];
+        ani[b]=temp;
             ++a;
             --b;
         }
